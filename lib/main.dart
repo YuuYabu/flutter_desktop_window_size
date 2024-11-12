@@ -38,9 +38,12 @@ class MainApp extends StatelessWidget {
             children: [
               Expanded(
                 flex: 1,
-                // タイトルバー代わりのContainer
-                child: Container(
-                  color: Colors.blue,
+                // ドラッグしてウィンドウを移動できる範囲を指定
+                child: DragToMoveArea(
+                  // タイトルバー代わりのContainer
+                  child: Container(
+                    color: Colors.blue,
+                  ),
                 ),
               ),
               const Expanded(
