@@ -33,26 +33,29 @@ class MainApp extends StatelessWidget {
       home: ClipRRect(
         // Windowsのデフォルトアプリでは半径7.5になっているので合わせる
         borderRadius: const BorderRadius.all(Radius.circular(7.5)),
-        child: Scaffold(
-          body: Column(
-            children: [
-              Expanded(
-                flex: 1,
-                // ドラッグしてウィンドウを移動できる範囲を指定
-                child: DragToMoveArea(
-                  // タイトルバー代わりのContainer
-                  child: Container(
-                    color: Colors.blue,
+        // ドラッグしてウィンドウのサイズを調整できる範囲を指定
+        child: DragToResizeArea(
+          child: Scaffold(
+            body: Column(
+              children: [
+                Expanded(
+                  flex: 1,
+                  // ドラッグしてウィンドウを移動できる範囲を指定
+                  child: DragToMoveArea(
+                    // タイトルバー代わりのContainer
+                    child: Container(
+                      color: Colors.blue,
+                    ),
                   ),
                 ),
-              ),
-              const Expanded(
-                flex: 19,
-                child: Center(
-                  child: Text('Hello World!'),
+                const Expanded(
+                  flex: 19,
+                  child: Center(
+                    child: Text('Hello World!'),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
