@@ -107,3 +107,20 @@ class _LayoutForWindowsState extends State<LayoutForWindows> {
     );
   }
 }
+
+class LayoutForMacOS extends StatefulWidget {
+  final Widget child;
+  const LayoutForMacOS({super.key, required this.child});
+
+  @override
+  State<LayoutForMacOS> createState() => _LayoutForMacOSState();
+}
+
+class _LayoutForMacOSState extends State<LayoutForMacOS> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: widget.child,
+    );
+  }
+}
