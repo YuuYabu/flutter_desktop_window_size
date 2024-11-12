@@ -10,6 +10,7 @@ void main() async {
   // ウィンドウプロパティを指定
   WindowOptions windowOptions = const WindowOptions(
     size: Size(1280, 720),
+    backgroundColor: Colors.transparent,
     center: true,
   );
 
@@ -29,9 +30,13 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+      home: ClipRRect(
+        // Windowsのデフォルトアプリでは半径7.5になっているので合わせる
+        borderRadius: BorderRadius.all(Radius.circular(7.5)),
+        child: Scaffold(
+          body: Center(
+            child: Text('Hello World!'),
+          ),
         ),
       ),
     );
