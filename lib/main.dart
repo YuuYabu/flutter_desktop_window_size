@@ -30,15 +30,17 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: LayoutForWindows(),
+      home: LayoutForWindows(
+          child: Center(
+        child: Text('Hello World!'),
+      )),
     );
   }
 }
 
 class LayoutForWindows extends StatefulWidget {
-  const LayoutForWindows({
-    super.key,
-  });
+  final Widget child;
+  const LayoutForWindows({super.key, required this.child});
 
   @override
   State<LayoutForWindows> createState() => _LayoutForWindowsState();
@@ -94,11 +96,9 @@ class _LayoutForWindowsState extends State<LayoutForWindows> {
                   ),
                 ),
               ),
-              const Expanded(
+              Expanded(
                 flex: 19,
-                child: Center(
-                  child: Text('Hello World!'),
-                ),
+                child: widget.child,
               ),
             ],
           ),
