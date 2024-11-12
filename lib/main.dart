@@ -29,10 +29,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: ClipRRect(
         // Windowsのデフォルトアプリでは半径7.5になっているので合わせる
-        borderRadius: BorderRadius.all(Radius.circular(7.5)),
+        borderRadius: const BorderRadius.all(Radius.circular(7.5)),
         // ドラッグしてウィンドウのサイズを調整できる範囲を指定
         child: DragToResizeArea(
           child: Scaffold(
@@ -40,16 +40,44 @@ class MainApp extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 1,
-                  // Windows風のタイトルバーとウィンドウコントロールを追加
-                  child: WindowCaption(
-                    title: Text(
-                      'test',
-                      style: TextStyle(color: Colors.black),
+                  // ドラッグしてウィンドウを移動できる範囲を指定
+                  child: DragToMoveArea(
+                    // タイトルバー代わりのContainer
+                    child: Container(
+                      color: Colors.blue,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          // 最小化
+                          IconButton(
+                              onPressed: () {
+                                windowManager.minimize();
+                              },
+                              icon: const Icon(Icons.minimize)),
+                          // 最大化・戻す
+                          IconButton(
+                              onPressed: () async {
+                                bool isMaximized =
+                                    await windowManager.isMaximized();
+                                if (isMaximized) {
+                                  windowManager.unmaximize();
+                                } else {
+                                  windowManager.maximize();
+                                }
+                              },
+                              icon: const Icon(Icons.rectangle_outlined)),
+                          // 閉じる
+                          IconButton(
+                              onPressed: () {
+                                windowManager.close();
+                              },
+                              icon: const Icon(Icons.close)),
+                        ],
+                      ),
                     ),
-                    backgroundColor: Colors.amber,
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   flex: 19,
                   child: Center(
                     child: Text('Hello World!'),
