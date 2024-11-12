@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -8,15 +10,26 @@ void main() async {
   // window_managerを初期化
   windowManager.ensureInitialized();
   // ウィンドウプロパティを指定
-  WindowOptions windowOptions = const WindowOptions(
-    size: Size(1280, 720),
+  WindowOptions windowOptions = WindowOptions(
+    size: const Size(1280, 720),
     backgroundColor: Colors.transparent,
     center: true,
+    // ウィンドウのタイトル
+    title: 'Flutterウィンドウサイズの話',
+    // タイトルバーのスタイル、`normal`で通常表示、`hidden`で非表示
+    // ウィンドウがフレームレスの場合、非表示される
+    titleBarStyle: Platform.isMacOS ? TitleBarStyle.normal : null,
+    // ウィンドウコントロールの表示、trueで表示
+    // ウィンドウがフレームレスの場合、非表示される
+    windowButtonVisibility: Platform.isMacOS ? true : null,
+    // タスクバーで非表示にするかどうかの設定
+    skipTaskbar: false,
   );
 
   // ウィンドウを表示
   windowManager.waitUntilReadyToShow(windowOptions, () async {
-    await windowManager.setAsFrameless();
+    // Windowsの場合フレームレス化
+    if (Platform.isWindows) await windowManager.setAsFrameless();
     await windowManager.show();
     await windowManager.focus();
   });
@@ -29,11 +42,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: LayoutForWindows(
-          child: Center(
-        child: Text('Hello World!'),
-      )),
+    Widget child = const Center(
+      child: Text('Hello World!'),
+    );
+    return MaterialApp(
+      home: Platform.isWindows
+          ? LayoutForWindows(child: child)
+          : LayoutForMacOS(child: child),
     );
   }
 }
