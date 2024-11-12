@@ -29,13 +29,27 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: ClipRRect(
         // Windowsのデフォルトアプリでは半径7.5になっているので合わせる
-        borderRadius: BorderRadius.all(Radius.circular(7.5)),
+        borderRadius: const BorderRadius.all(Radius.circular(7.5)),
         child: Scaffold(
-          body: Center(
-            child: Text('Hello World!'),
+          body: Column(
+            children: [
+              Expanded(
+                flex: 1,
+                // タイトルバー代わりのContainer
+                child: Container(
+                  color: Colors.blue,
+                ),
+              ),
+              const Expanded(
+                flex: 19,
+                child: Center(
+                  child: Text('Hello World!'),
+                ),
+              ),
+            ],
           ),
         ),
       ),
