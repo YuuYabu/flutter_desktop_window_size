@@ -15,6 +15,7 @@ void main() async {
 
   // ウィンドウを表示
   windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.setAsFrameless();
     await windowManager.show();
     await windowManager.focus();
   });
