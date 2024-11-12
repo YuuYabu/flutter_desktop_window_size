@@ -53,6 +53,13 @@ class MainApp extends StatelessWidget {
   }
 }
 
+/// Windows向けのレイアウトを提供するウィジェット。
+///
+/// このウィジェットは、ウィンドウのドラッグやサイズ調整、
+/// タイトルバー部分のボタン（最小化、最大化、閉じる）を備えた
+/// Windowsデスクトップ風のUIを構築します。
+///
+/// - [child] は、ウィンドウの主要な内容を表示するウィジェットです。
 class LayoutForWindows extends StatefulWidget {
   final Widget child;
   const LayoutForWindows({super.key, required this.child});
@@ -123,6 +130,12 @@ class _LayoutForWindowsState extends State<LayoutForWindows> {
   }
 }
 
+/// macOS向けのレイアウトを提供するウィジェット。
+///
+/// このウィジェットは、macOSのデスクトップアプリケーションで使用するレイアウトを提供します。
+/// Windowsのようなカスタムタイトルバーやウィンドウ操作ボタンは含まれていません。
+///
+/// - [child] は、ウィンドウの主要な内容を表示するウィジェットです。
 class LayoutForMacOS extends StatefulWidget {
   final Widget child;
   const LayoutForMacOS({super.key, required this.child});
